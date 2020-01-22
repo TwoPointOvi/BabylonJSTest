@@ -17,9 +17,6 @@ var GameObject = /** @class */ (function () {
     GameObject.prototype.getMesh = function () {
         return this._mesh;
     };
-    GameObject.prototype.changeFriction = function (frictionVal) {
-        this._mesh.physicsImpostor.friction = frictionVal;
-    };
     return GameObject;
 }());
 var Ground = /** @class */ (function (_super) {
@@ -64,14 +61,6 @@ var Player = /** @class */ (function (_super) {
             movement.z -= this.movementSpeed;
         }
         this._mesh.moveWithCollisions(movement);
-    };
-    Player.prototype.movePlayerX = function (distance) {
-        //this._mesh.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(distance * this.velocityFactor, 0, 0));
-        //this._mesh.translate(BABYLON.Vector3.Right(), distance, BABYLON.Space.WORLD);
-        if (this._mesh.physicsImpostor.friction != 0) {
-            this.changeFriction(0.0);
-            this._mesh.physicsImpostor.applyImpulse(new BABYLON.Vector3(distance, 0, 0), this._mesh.getAbsolutePosition());
-        }
     };
     Player.prototype.movePlayerY = function (distance) {
         if (this._mesh.position.y <= 1.1) {
